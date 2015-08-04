@@ -53,11 +53,14 @@
                                     <constraint firstAttribute="width" secondItem="GTQ-Mk-4Qo" secondAttribute="height" multiplier="6:5" id="Ss7-ok-u4D"/>
                                 </constraints>
                             </pickerView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZIT-Ri-HfJ">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="1" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="ZIT-Ri-HfJ">
                                 <rect key="frame" x="188" y="269" width="118" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZIT-Ri-HfJ" secondAttribute="height" multiplier="19:5" id="FHK-bd-c9K"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="ZIZ-iR-JLo"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 km" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7v-bL-eBS">
                                 <rect key="frame" x="137" y="273" width="38" height="21"/>
@@ -86,6 +89,12 @@
                             <constraint firstAttribute="centerX" secondItem="afL-Gq-IYG" secondAttribute="centerX" id="tGR-hy-MzC"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="categories" destination="GTQ-Mk-4Qo" id="OVU-iM-QSn"/>
+                        <outlet property="distanceLabel" destination="a7v-bL-eBS" id="Gan-ev-6MO"/>
+                        <outlet property="distances" destination="ZIT-Ri-HfJ" id="LCv-FN-Fyi"/>
+                        <outlet property="searchButton" destination="che-RW-4uM" id="kkB-bv-IbD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
