@@ -8,6 +8,18 @@
 
 import UIKit
 
+struct APIStrings {
+    
+    // Eventful API URL Strings
+    static let ApiRoot = "http://api.eventful.com/json/events/search?"
+    static let ApiKey = "app_key=4nrBdpDJGpNF35RQ"
+    static let LocationMethod = "&location="
+    static let Category = "&category="
+    static let WithinMethod = "&within="
+ //   static let EFPageSizeMethod = "&page_size="
+ //   static let EFPageNumber = "&page_number="
+}
+
 class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
 
     @IBOutlet weak var categories: UIPickerView!
@@ -15,7 +27,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var searchButton: UIButton!
     
-    let categoriesData = ["Concerts","Festivals","Comedy","Family","Night life","Sports","Ticket deals"]
+    let categoriesData = ["music","conference","food","art"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +39,24 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func searchButtonClicked(sender: UIButton) {
+        searchEventsFromApi()
+    }
+    
+    func searchEventsFromApi() {
+        println(getEventfulURL())
+    }
+    
+    func getEventfulURL() -> NSURL? {
+        var category = self.categoriesData[categories.selectedRowInComponent(0)]
+        var urlString = APIStrings.ApiRoot + APIStrings.ApiKey +
+            APIStrings.Category + category +
+            APIStrings.LocationMethod + "San+Francicso" +
+            APIStrings.WithinMethod + Int(self.distances.value).description
+        
+        return NSURL(string: urlString)
     }
     
     @IBAction func sliderValueChanged(sender: UISlider) {
