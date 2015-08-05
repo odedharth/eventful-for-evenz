@@ -16,6 +16,8 @@ struct APIStrings {
     static let LocationMethod = "&location="
     static let Category = "&category="
     static let WithinMethod = "&within="
+    static let DateMethod = "&date="
+
  //   static let EFPageSizeMethod = "&page_size="
  //   static let EFPageNumber = "&page_number="
 }
@@ -42,18 +44,23 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     }
     
     @IBAction func searchButtonClicked(sender: UIButton) {
-        searchEventsFromApi()
+        self.performSegueWithIdentifier("eventsPage", sender: getEventfulURL())
     }
     
-    func searchEventsFromApi() {
-        println(getEventfulURL())
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "eventsPage" {
+            if let destinationVC = segue.destinationViewController as? EventsTableViewController {
+                destinationVC.apiQuery = getEventfulURL() 
+            }
+        }
     }
     
     func getEventfulURL() -> NSURL? {
         var category = self.categoriesData[categories.selectedRowInComponent(0)]
         var urlString = APIStrings.ApiRoot + APIStrings.ApiKey +
+            APIStrings.DateMethod + "Future" +
             APIStrings.Category + category +
-            APIStrings.LocationMethod + "San+Francicso" +
+            APIStrings.LocationMethod + "san+francisco" +
             APIStrings.WithinMethod + Int(self.distances.value).description
         
         return NSURL(string: urlString)
